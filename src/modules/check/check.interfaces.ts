@@ -1,14 +1,15 @@
-import { SignUpDTO, SignInDTO, VerifyDTO } from '@/user/user.dtos'
+import { CreateCheckDTO } from '@/check/check.dtos'
 import mongoose from 'mongoose'
-import { Ok, Err, Result } from 'ts-results'
+import { Result } from 'ts-results'
 
-export interface IUserService {
-  signup(dto: SignUpDTO): Promise<Result<IUserResult, string>>
-  signin(dto: SignInDTO): Promise<Result<IUserResult, string>>
-  verify(dto: VerifyDTO): Promise<Result<string, string>>
+export interface ICheckService {
+  create(dto: CreateCheckDTO): Promise<Result<string, string>>
+  getOne(dto: CreateCheckDTO): Promise<Result<string, string>>
+  update(dto: CreateCheckDTO): Promise<Result<string, string>>
+  delete(dto: CreateCheckDTO): Promise<Result<string, string>>
 }
 
-export interface IUserSchema extends mongoose.Document {
+export interface ICheckSchema extends mongoose.Document {
   name: string
   url: string
   protocol: string
@@ -30,8 +31,8 @@ export interface IUserSchema extends mongoose.Document {
   ignoreSSL?: boolean
 }
 
-export interface IUserResult {
-  name: string
-  email: string
-  id: string
-}
+// export interface IUserResult {
+//   name: string
+//   email: string
+//   id: string
+// }

@@ -3,7 +3,6 @@ import IController from '@/shared/interfaces/controller.interface'
 import validationMiddleWare from '@/shared/middlewares/validation.middleware'
 import { signUpSchema, signInSchema, verifySchema } from '@/user/user.validations'
 import { IUserService } from '@/user/user.interfaces'
-import { Ok, Err, Result } from 'ts-results'
 import HttpException from '@/shared/errors/errors.httpException'
 import { signJWT } from '@/shared/utils/jwt.utils'
 
