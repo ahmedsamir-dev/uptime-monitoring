@@ -10,6 +10,7 @@ const checkSchema = new Schema<ICheckSchema>({
   timeout: { type: Number, required: false },
   interval: { type: Number, required: false },
   threshold: { type: Number, required: false },
+  email: { type: String, required: false },
   authentication: {
     type: { username: { type: String, required: true }, password: { type: String, required: true } },
     required: false,
@@ -21,6 +22,7 @@ const checkSchema = new Schema<ICheckSchema>({
   },
   tags: { type: [String], required: false },
   ignoreSSL: { type: Boolean, required: false },
+  createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
 })
 
 const Check = model<ICheckSchema>('Check', checkSchema)

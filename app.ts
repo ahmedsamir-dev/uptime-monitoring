@@ -7,6 +7,7 @@ import IController from '@/shared/interfaces/controller.interface'
 import errorMiddleware from '@/shared/middlewares/error.middleware'
 import MongoConnection from '@/connections/mongo.connections'
 import RedisConnection from '@/connections/redis.connections'
+import '@/shared/schedulers/ping.scheduler'
 
 /**
  * App Class: Bootstrap our server and intialise all required steps to start the server

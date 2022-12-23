@@ -26,6 +26,7 @@ class UserController implements IController {
     console.log(req.body)
 
     const data = await this.userService.signup(req.body)
+    console.log(data)
 
     if (data.ok) {
       res.status(200).set('token', signJWT(data.val.id)).json({

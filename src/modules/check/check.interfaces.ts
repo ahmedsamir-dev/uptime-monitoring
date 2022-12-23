@@ -1,12 +1,12 @@
-import { CreateCheckDTO } from '@/check/check.dtos'
-import mongoose from 'mongoose'
+import { CreateCheckDTO, GetCheckDTO, DeleteCheckDTO, UpdateCheckDTO } from '@/check/check.dtos'
+import mongoose, { Schema } from 'mongoose'
 import { Result } from 'ts-results'
 
 export interface ICheckService {
-  create(dto: CreateCheckDTO): Promise<Result<string, string>>
-  getOne(dto: CreateCheckDTO): Promise<Result<string, string>>
-  update(dto: CreateCheckDTO): Promise<Result<string, string>>
-  delete(dto: CreateCheckDTO): Promise<Result<string, string>>
+  create(dto: CreateCheckDTO, userId: string): Promise<Result<ICheckSchema, string>>
+  getOne(dto: GetCheckDTO): Promise<Result<ICheckSchema, string>>
+  update(dto: UpdateCheckDTO): Promise<Result<ICheckSchema, string>>
+  delete(dto: DeleteCheckDTO): Promise<Result<true, string>>
 }
 
 export interface ICheckSchema extends mongoose.Document {
@@ -15,6 +15,7 @@ export interface ICheckSchema extends mongoose.Document {
   protocol: string
   path?: string
   port?: number
+  email?: string
   webhook?: string
   timeout?: number
   interval?: number
@@ -29,6 +30,7 @@ export interface ICheckSchema extends mongoose.Document {
   }
   tags?: string[]
   ignoreSSL?: boolean
+  createdBy?: Schema.Types.ObjectId
 }
 
 // export interface IUserResult {

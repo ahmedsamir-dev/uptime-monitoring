@@ -4,7 +4,7 @@ import User from '@/user/user.model'
 import { hashPassword, verifyPassword } from '@/user/user.utils'
 import { Ok, Err, Result } from 'ts-results'
 import { buildUserResult } from '@/user/user.utils'
-import { sendVerificationMail } from '@/shared/services/mail.services'
+import { sendVerificationMail } from '@/modules/shared/services/verification.services'
 import { IVerificationMail } from '@/shared/interfaces/verificationMail.interface'
 import crypto from 'crypto'
 import { log } from 'console'
@@ -12,6 +12,7 @@ import { log } from 'console'
 export default class UserService implements IUserService {
   signup = async (dto: SignUpDTO): Promise<Result<IUserResult, string>> => {
     const isUserAlreadyExist = await User.exists({ email: dto.email })
+    log(isUserAlreadyExist)
 
     //User is already signed up
     if (isUserAlreadyExist?._id) {
