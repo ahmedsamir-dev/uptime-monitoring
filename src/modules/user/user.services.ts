@@ -7,12 +7,10 @@ import { buildUserResult } from '@/user/user.utils'
 import { sendVerificationMail } from '@/modules/shared/services/verification.services'
 import { IVerificationMail } from '@/shared/interfaces/verificationMail.interface'
 import crypto from 'crypto'
-import { log } from 'console'
 
 export default class UserService implements IUserService {
   signup = async (dto: SignUpDTO): Promise<Result<IUserResult, string>> => {
     const isUserAlreadyExist = await User.exists({ email: dto.email })
-    log(isUserAlreadyExist)
 
     //User is already signed up
     if (isUserAlreadyExist?._id) {

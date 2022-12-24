@@ -11,8 +11,6 @@ export default function validationMiddleWare<T extends ZodTypeAny>(schema: T): R
         next()
       })
       .catch((zodError: ZodError) => {
-        console.log(zodError.errors)
-
         zodError.errors.length = 1
         const errorMessage = zodError.errors[0].message
 

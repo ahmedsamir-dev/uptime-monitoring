@@ -19,7 +19,6 @@ export const verifyJWT = async (token: string): Promise<IVerifyJWTResult> => {
   const userId = result.userId
 
   const isUserAlreadyExist = await User.exists({ _id: userId })
-  console.log(isUserAlreadyExist)
 
   //User exists
   if (isUserAlreadyExist?._id) {

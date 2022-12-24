@@ -1,4 +1,4 @@
-import IPingResult from '@/shared/interfaces/ping.interface'
+import { IPingResult } from '@/shared/interfaces/ping.interface'
 
 export interface INotificationData {
   pingResult: IPingResult

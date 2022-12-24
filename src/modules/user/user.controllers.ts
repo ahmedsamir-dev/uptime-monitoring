@@ -23,10 +23,7 @@ class UserController implements IController {
   }
 
   private signup = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    console.log(req.body)
-
     const data = await this.userService.signup(req.body)
-    console.log(data)
 
     if (data.ok) {
       res.status(200).set('token', signJWT(data.val.id)).json({

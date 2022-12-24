@@ -9,8 +9,6 @@ import HttpException from '@/shared/errors/errors.httpException'
  * @param next - Express next function
  */
 export default function errorHandler(err: HttpException, req: Request, res: Response, next: NextFunction) {
-  console.log(err)
-
   const status = err.statusCode || 500
   const message = err.message || 'Something went wrong!'
 

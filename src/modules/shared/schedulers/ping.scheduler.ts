@@ -13,7 +13,6 @@ export default class PingScheduler {
   private static worker: Worker = new Worker('ping', this.jobHandler)
 
   public static async addPing(ping: ICheckSchema) {
-    console.log(ping)
     try {
       await this.queue.add(ping._id.toString(), ping, {
         repeat: {
@@ -21,9 +20,7 @@ export default class PingScheduler {
         },
         jobId: ping._id.toString(),
       })
-    } catch (error) {
-      console.log(error)
-    }
+    } catch (error) {}
   }
 
   public static async deletePing(id: string): Promise<void> {
@@ -37,15 +34,11 @@ export default class PingScheduler {
         .map((entry) => entry.key)[0]
 
       const job = await this.queue.removeRepeatableByKey(jobKey)
-      console.log(job)
-    } catch (error) {
-      console.log(error)
-    }
+    } catch (error) {}
   }
 
   private static async jobHandler(job: Job): Promise<void> {
     const check = job.data
-    console.log('hanlding job', check)
 
     axios({
       method: 'GET',
@@ -56,17 +49,16 @@ export default class PingScheduler {
     })
       .then(async (response) => {
         const responseTime = Number(response.headers['Request-Duration'])
-        console.log(responseTime)
-        await pushLatestPing({ check, status: PingStatus.UP, responseTime: responseTime ?? 0 })
+        await pushLatestPing({ check, status: PingStatus.UP, responseTime: responseTime ?? 0, timestamp: Date.now() })
       })
       .catch(async (error) => {
-        await pushLatestPing({ check, status: PingStatus.DOWN, responseTime: 0 })
+        await pushLatestPing({ check, status: PingStatus.DOWN, responseTime: 0, timestamp: Date.now() })
 
         //Send Notification for that down
         if (check.email) {
           const notificationService = NotificationFactory.create(EmailNotificationService)
           await notificationService.notify({
-            pingResult: { check, status: PingStatus.DOWN, responseTime: 0 },
+            pingResult: { check, status: PingStatus.DOWN, responseTime: 0, timestamp: Date.now() },
             reciepentData: check.email,
           })
         } else {

@@ -3,7 +3,7 @@ import { ICheckSchema } from '@/check/check.interfaces'
 
 const checkSchema = new Schema<ICheckSchema>({
   name: { type: String, required: true },
-  url: { type: String, required: true, unique: true },
+  url: { type: String, required: true },
   protocol: { type: String, required: true },
   port: { type: Number, required: false },
   webhook: { type: String, required: false },
