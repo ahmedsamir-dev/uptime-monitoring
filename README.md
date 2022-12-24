@@ -18,6 +18,6 @@ description: URL uptime monitoring system RESTful API
 10. &#x20;ts-results
 11. &#x20;nodemailer
 
-### [Project Documentation](https://app.gitbook.com/o/XiGKMGdyeqLOgMT29DFB/s/7FtCLA05hxyiV6Ri9gom/)
+### [Project Documentation](https://ahmed-samir.gitbook.io/uptime-monitoring-project-documentation/)
 
-### [API Documentation](./#api-documentation)
+### [API Documentation](https://ahmed-samir.gitbook.io/uptime-monitoring-api-documentation/)
